@@ -1,0 +1,19 @@
+    lazy: keys before [ 'index:0-0-0', 'settings' ] after [ 'index:0-0-0', 'settings:0-0-1' ] start value 1
+    lazy:false: keys [ 'index:0-0-0', 'settings:0-0-1' ] settings key settings:0-0-1 start value 1
+PASS __tests__/first-visit-fade.test.tsx
+  ✓ lazy tab: the incoming route is a new key and its value starts at 1 (fade-in start) 
+  ✓ lazy: false (control): the incoming route keeps its key and starts at 1 
+PASS __tests__/useAnimatedHashMap.unit.test.tsx
+  useAnimatedHashMap
+    ✓ starts the focused route at 0 and the others at their side 
+    ✓ returns the same map while the route keys do not change
+    ✓ starts a route that replaces a lazy placeholder and is focused at once beside the previous route 
+    ✓ starts a new focused route to the left of the previous route at -1
+    ✓ keeps the values of routes that are still present
+    ✓ starts a new focused route at 0 when the previous focused route is gone
+Test Suites: 2 passed, 2 total
+Tests:       8 passed, 8 total
+Snapshots:   0 total
+Time:        0.592 s, estimated 1 s
+Ran all test suites.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
