@@ -31,3 +31,11 @@ Full output: [media/jest-before.txt](media/jest-before.txt), [media/jest-after-w
   focused, so it starts at `0`.
 - `BottomTabView` then animates the focused route to `0`. It is already there, so no enter animation
   runs. The placeholder's value, which waited at `1`, is dropped at that moment.
+
+## Fix
+
+The hook remembers which route was focused on its previous run. A route that is new and focused at
+once now starts beside the previously focused route (`1` if it is to the right, `-1` if to the left),
+so the enter animation has somewhere to come from. Routes that keep their key keep their value, and
+a new focused route whose predecessor is gone still starts at `0`, as before. That covers the lazy
+placeholder swap and a tab that is added and focused at the same time.
