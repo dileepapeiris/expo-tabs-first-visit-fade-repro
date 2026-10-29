@@ -66,3 +66,7 @@ async function firstVisitStartValue(lazy: boolean) {
   const settingsKey = afterNav.keys[afterNav.index];
   return { beforeNav, afterNav, settingsKey, start: afterNav.values[settingsKey] };
 }
+
+beforeEach(() => {
+  jest.useFakeTimers();
+});
