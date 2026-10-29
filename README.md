@@ -39,3 +39,16 @@ once now starts beside the previously focused route (`1` if it is to the right, 
 so the enter animation has somewhere to come from. Routes that keep their key keep their value, and
 a new focused route whose predecessor is gone still starts at `0`, as before. That covers the lazy
 placeholder swap and a tab that is added and focused at the same time.
+
+## Run it
+
+```sh
+npm install
+npm test                      # 3 of 8 fail on the published build
+scripts/apply-fix.sh          # swap in the fixed hook
+npm test                      # 8 of 8 pass
+scripts/apply-fix.sh undo     # back to the published build
+```
+
+To see it on a device or in a browser: `npx expo start`, open the app, tap **Settings**. Before the
+fix, Settings pops in without a fade on the first tap only.
