@@ -20,3 +20,14 @@ Two Jest suites, run against the published `expo-router` 58.0.28 build and again
 | hook: first render, unchanged keys, kept values, previous route gone (4 tests) | pass | pass |
 
 Full output: [media/jest-before.txt](media/jest-before.txt), [media/jest-after-with-fix.txt](media/jest-after-with-fix.txt).
+
+## Cause
+
+- An unvisited lazy tab is a placeholder route keyed by its route name (`settings`), added by
+  `appendMissingPlaceholderTabRoutes` since expo/expo#48618.
+- The first visit replaces it with the real route under a generated key (`settings:0-0-1`).
+- `useAnimatedHashMap` in `react-navigation/bottom-tabs/utils` creates an `Animated.Value` for every
+  key it has not seen, starting at `0` when that route is the focused index. The real route is already
+  focused, so it starts at `0`.
+- `BottomTabView` then animates the focused route to `0`. It is already there, so no enter animation
+  runs. The placeholder's value, which waited at `1`, is dropped at that moment.
