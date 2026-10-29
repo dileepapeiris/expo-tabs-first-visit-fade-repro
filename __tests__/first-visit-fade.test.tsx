@@ -26,3 +26,24 @@ jest.mock('expo-router/build/react-navigation/bottom-tabs/utils/useAnimatedHashM
     },
   };
 });
+
+function routes(lazy: boolean) {
+  return {
+    '(tabs)/_layout': () => (
+      <Tabs screenOptions={{ animation: 'fade', lazy }}>
+        <Tabs.Screen name="index" options={{ title: 'Home' }} />
+        <Tabs.Screen name="settings" options={{ title: 'Settings' }} />
+      </Tabs>
+    ),
+    '(tabs)/index': () => (
+      <View testID="home">
+        <Text>Home</Text>
+      </View>
+    ),
+    '(tabs)/settings': () => (
+      <View testID="settings">
+        <Text>Settings</Text>
+      </View>
+    ),
+  };
+}
