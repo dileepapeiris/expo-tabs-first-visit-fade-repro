@@ -1,0 +1,51 @@
+    lazy: keys before [ 'index:0-0-0', 'settings' ] after [ 'index:0-0-0', 'settings:0-0-1' ] start value 0
+    lazy:false: keys [ 'index:0-0-0', 'settings:0-0-1' ] settings key settings:0-0-1 start value 1
+FAIL __tests__/first-visit-fade.test.tsx
+  ✕ lazy tab: the incoming route is a new key and its value starts at 1 (fade-in start) 
+  ✓ lazy: false (control): the incoming route keeps its key and starts at 1 
+  ● lazy tab: the incoming route is a new key and its value starts at 1 (fade-in start)
+    expect(received).toBe(expected) // Object.is equality
+    Expected: 1
+    Received: 0
+      82 |   expect(settingsKey).not.toBe('settings');
+    > 84 |   expect(start).toBe(1);
+         |                 ^
+      85 | });
+      86 |
+      87 | test('lazy: false (control): the incoming route keeps its key and starts at 1', async () => {
+FAIL __tests__/useAnimatedHashMap.unit.test.tsx
+  useAnimatedHashMap
+    ✓ starts the focused route at 0 and the others at their side 
+    ✓ returns the same map while the route keys do not change
+    ✕ starts a route that replaces a lazy placeholder and is focused at once beside the previous route
+    ✕ starts a new focused route to the left of the previous route at -1 
+    ✓ keeps the values of routes that are still present
+    ✓ starts a new focused route at 0 when the previous focused route is gone
+  ● useAnimatedHashMap › starts a route that replaces a lazy placeholder and is focused at once beside the previous route
+    expect(received).toBe(expected) // Object.is equality
+    Expected: 1
+    Received: 0
+      25 |     expect(values(result.current)).toEqual({ 'index:1': 0, settings: 1 });
+      26 |     await rerender(state(['index:1', 'settings:1'], 1));
+    > 27 |     expect(values(result.current)['settings:1']).toBe(1);
+         |                                                  ^
+      28 |   });
+      29 |   it('starts a new focused route to the left of the previous route at -1', async () => {
+      30 |     const { result, rerender } = await renderHook(useAnimatedHashMap, { initialProps: state(['home', 'profile:1'], 1) });
+  ● useAnimatedHashMap › starts a new focused route to the left of the previous route at -1
+    expect(received).toBe(expected) // Object.is equality
+    Expected: -1
+    Received: 0
+      30 |     const { result, rerender } = await renderHook(useAnimatedHashMap, { initialProps: state(['home', 'profile:1'], 1) });
+      31 |     await rerender(state(['home:1', 'profile:1'], 0));
+    > 32 |     expect(values(result.current)['home:1']).toBe(-1);
+         |                                              ^
+      33 |   });
+      34 |   it('keeps the values of routes that are still present', async () => {
+      35 |     const { result, rerender } = await renderHook(useAnimatedHashMap, { initialProps: state(['index:1', 'settings'], 0) });
+Test Suites: 2 failed, 2 total
+Tests:       3 failed, 5 passed, 8 total
+Snapshots:   0 total
+Time:        0.851 s, estimated 1 s
+Ran all test suites.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
