@@ -74,3 +74,22 @@ beforeEach(() => {
 afterEach(() => {
   jest.useRealTimers();
 });
+
+test('lazy tab: the incoming route is a new key and its value starts at 1 (fade-in start)', async () => {
+  const { beforeNav, afterNav, settingsKey, start } = await firstVisitStartValue(true);
+  // The unvisited tab is a placeholder keyed by its name; the real route gets a generated key.
+  expect(beforeNav.keys).toContain('settings');
+  expect(settingsKey).not.toBe('settings');
+  console.log('lazy: keys before', beforeNav.keys, 'after', afterNav.keys, 'start value', start);
+  expect(start).toBe(1);
+});
+
+test('lazy: false (control): the incoming route keeps its key and starts at 1', async () => {
+  const { beforeNav, afterNav, settingsKey, start } = await firstVisitStartValue(false);
+  expect(beforeNav.keys).toEqual(afterNav.keys);
+  console.log('lazy:false: keys', afterNav.keys, 'settings key', settingsKey, 'start value', start);
+  expect(start).toBe(1);
+});
+
+// Not tested here: the second visit. BottomTabView animates with the native driver, which the
+// Jest environment mocks, so an existing value never moves and its later start cannot be read.
