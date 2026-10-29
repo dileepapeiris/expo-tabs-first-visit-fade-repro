@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "expo-tabs-first-visit-fade-repro",
+    "slug": "expo-tabs-first-visit-fade-repro",
+    "version": "1.0.0",
+    "scheme": "tabsfade",
+    "newArchEnabled": true,
+    "plugins": ["expo-router"],
+    "experiments": { "typedRoutes": false }
+  }
+}
