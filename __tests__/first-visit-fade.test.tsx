@@ -47,3 +47,10 @@ function routes(lazy: boolean) {
     ),
   };
 }
+
+async function firstVisitStartValue(lazy: boolean) {
+  hashLog.length = 0;
+  const { getPathname } = await renderRouter(routes(lazy), { initialUrl: '/' });
+  expect(getPathname()).toBe('/');
+  expect(screen.getByTestId('home')).toBeTruthy();
+  const beforeNav = hashLog.at(-1)!;
