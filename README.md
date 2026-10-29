@@ -65,3 +65,9 @@ fix, Settings pops in without a fade on the first tap only.
 
 The second visit is not asserted: the tabs animate with the native driver, which Jest mocks, so an
 existing value never moves in this environment.
+
+## Environment
+
+- expo 58.0.21, expo-router 58.0.28, react-native 0.88.0, react 19.3.0
+- jest-expo 58.0.13, @testing-library/react-native 14.1.0, @react-native/jest-preset 0.88.0
+- Installed with `npm install --legacy-peer-deps` (react-test-renderer's peer range); Node 26
