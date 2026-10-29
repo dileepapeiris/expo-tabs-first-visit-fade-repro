@@ -54,3 +54,15 @@ async function firstVisitStartValue(lazy: boolean) {
   expect(getPathname()).toBe('/');
   expect(screen.getByTestId('home')).toBeTruthy();
   const beforeNav = hashLog.at(-1)!;
+
+  const { router } = require('expo-router');
+  await act(async () => {
+    router.navigate('/settings');
+  });
+  expect(getPathname()).toBe('/settings');
+  expect(screen.getByTestId('settings')).toBeTruthy();
+
+  const afterNav = hashLog.at(-1)!;
+  const settingsKey = afterNav.keys[afterNav.index];
+  return { beforeNav, afterNav, settingsKey, start: afterNav.values[settingsKey] };
+}
