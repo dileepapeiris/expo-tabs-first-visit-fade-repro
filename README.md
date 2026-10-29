@@ -52,3 +52,16 @@ scripts/apply-fix.sh undo     # back to the published build
 
 To see it on a device or in a browser: `npx expo start`, open the app, tap **Settings**. Before the
 fix, Settings pops in without a fade on the first tap only.
+
+## The tests
+
+- `__tests__/first-visit-fade.test.tsx` renders the two-tab layout through `expo-router/testing-library`,
+  wraps the real `useAnimatedHashMap` to record every route's starting value, and navigates to
+  `/settings` for the first time. It asserts the placeholder was keyed by name, the real route got a
+  new key, and the new value starts at `1`. A `lazy: false` control shows the expected start value.
+- `__tests__/useAnimatedHashMap.unit.test.tsx` is the unit test the PR adds upstream, pointed at the
+  installed build: first render positions, unchanged keys return the same map, the placeholder swap,
+  a new focused route to the left, kept values, and a focused route whose predecessor is gone.
+
+The second visit is not asserted: the tabs animate with the native driver, which Jest mocks, so an
+existing value never moves in this environment.
