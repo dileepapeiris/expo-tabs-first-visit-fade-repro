@@ -70,3 +70,7 @@ async function firstVisitStartValue(lazy: boolean) {
 beforeEach(() => {
   jest.useFakeTimers();
 });
+
+afterEach(() => {
+  jest.useRealTimers();
+});
